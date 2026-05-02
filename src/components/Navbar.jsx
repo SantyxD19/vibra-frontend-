@@ -19,7 +19,7 @@ function Navbar() {
       <div className="flex justify-between items-center">
         {/* LOGO */}
         <div className="flex items-center gap-2">
-          <img src={logo} alt="Vibra" className="h-18" />
+          <img src={logo} alt="Vibra" className="h-15" />
         </div>
 
         {/* BOTÓN MOBILE */}
