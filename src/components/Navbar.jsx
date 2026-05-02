@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import logo from "../assets/logoVibra.png";
 
 function Navbar() {
   const location = useLocation();
@@ -17,7 +18,10 @@ function Navbar() {
     <nav className="bg-gray-900 border-b border-gray-800 px-6 py-4">
       <div className="flex justify-between items-center">
         {/* LOGO */}
-        <h1 className="text-xl font-bold text-purple-500">Vibra</h1>
+        <div className="flex items-center gap-2">
+          <img src={logo} alt="Vibra" className="h-10" />
+          <h1 className="text-white font-bold text-xl">Vibra</h1>
+        </div>
 
         {/* BOTÓN MOBILE */}
         <button

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { GoogleLogin } from "@react-oauth/google";
+import logo from "../assets/logoVibra.png";
 
 function Register() {
   const [name, setName] = useState("");
@@ -95,11 +96,8 @@ function Register() {
     <div className="flex min-h-screen">
       {/* IZQUIERDA */}
       <div className="hidden md:flex w-1/2 bg-black text-white items-center justify-center">
-        <div>
-          <h1 className="text-5xl font-bold text-purple-500">Vibra</h1>
-          <p className="text-gray-400 mt-3">
-            Crea tu cuenta y empieza a vibrar
-          </p>
+        <div className="flex justify-center mb-4">
+          <img src={logo} alt="Vibra" className="h-16" />
         </div>
       </div>
 
