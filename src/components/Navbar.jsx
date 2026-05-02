@@ -20,7 +20,6 @@ function Navbar() {
         {/* LOGO */}
         <div className="flex items-center gap-2">
           <img src={logo} alt="Vibra" className="h-18" />
-          <h1 className="text-white font-bold text-xl">Vibra</h1>
         </div>
 
         {/* BOTÓN MOBILE */}

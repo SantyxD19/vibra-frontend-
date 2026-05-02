@@ -97,7 +97,7 @@ function Register() {
       {/* IZQUIERDA */}
       <div className="hidden md:flex w-1/2 bg-black text-white items-center justify-center">
         <div className="flex justify-center mb-4">
-          <img src={logo} alt="Vibra" className="h-24" />
+          <img src={logo} className="h-24 border border-red-500" />
         </div>
       </div>
 
