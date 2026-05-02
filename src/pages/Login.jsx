@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Eye, EyeOff } from "lucide-react";
 import { GoogleLogin } from "@react-oauth/google";
-import logo from "../assets/logoVibra.png";
+import logo from "../assets/vibra-logo.png";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -97,7 +97,7 @@ function Login() {
       <div className="hidden md:flex w-1/2 bg-black text-white items-center justify-center">
         <div>
           <div className="flex justify-center mb-4">
-            <img src={logo} alt="Vibra" className="h-16" />
+            <img src={logo} alt="Vibra" className="h-24" />
           </div>
           <p className="text-gray-400 mt-3">
             Conecta con eventos y combos en tiempo real

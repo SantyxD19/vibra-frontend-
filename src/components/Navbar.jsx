@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import logo from "../assets/logoVibra.png";
+import logo from "../assets/vibra-logo.png";
 
 function Navbar() {
   const location = useLocation();
@@ -19,7 +19,7 @@ function Navbar() {
       <div className="flex justify-between items-center">
         {/* LOGO */}
         <div className="flex items-center gap-2">
-          <img src={logo} alt="Vibra" className="h-10" />
+          <img src={logo} alt="Vibra" className="h-18" />
           <h1 className="text-white font-bold text-xl">Vibra</h1>
         </div>
 
