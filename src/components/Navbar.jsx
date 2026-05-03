@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import logo from "../assets/vibra-logo.png";
+import logo from "../assets/logov.png";
 
 function Navbar() {
   const location = useLocation();

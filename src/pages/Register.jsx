@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { GoogleLogin } from "@react-oauth/google";
-import logo from "../assets/vibra-logo.png";
+import logo from "../assets/logov.png";
 
 function Register() {
   const [name, setName] = useState("");
