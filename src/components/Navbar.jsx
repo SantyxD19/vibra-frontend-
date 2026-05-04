@@ -17,10 +17,13 @@ function Navbar() {
   return (
     <nav className="bg-gray-900 border-b border-gray-800 px-6 py-3">
       <div className="flex justify-between items-center">
-        {/* 🔥 LOGO MEJORADO */}
+        {/* 🔥 LOGO PRO */}
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="Vibra" className="h-8 object-contain" />
-          <span className="text-white font-bold text-lg tracking-wide">
+          <div className="bg-gray-800 p-1.5 rounded-lg">
+            <img src={logo} alt="Vibra" className="h-7 md:h-8 object-contain" />
+          </div>
+
+          <span className="text-white font-semibold text-base md:text-lg tracking-wide">
             Vibra
           </span>
         </Link>
@@ -55,7 +58,7 @@ function Navbar() {
         </div>
       </div>
 
-      {/* MOBILE */}
+      {/* MOBILE MENU */}
       {open && (
         <div className="md:hidden flex flex-col gap-4 mt-4 text-sm">
           <Link to="/" className={isActive("/")}>
