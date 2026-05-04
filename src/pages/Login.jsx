@@ -104,7 +104,7 @@ function Login() {
           </p>
         </div>
       </div>
-
+      // deploy fix
       {/* DERECHA */}
       <div className="w-full md:w-1/2 flex items-center justify-center bg-gray-900">
         <div className="w-full max-w-md bg-gray-800 p-8 rounded-2xl border border-gray-700 shadow-lg">
