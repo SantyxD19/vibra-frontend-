@@ -17,13 +17,17 @@ function Navbar() {
   return (
     <nav className="bg-gray-900 border-b border-gray-800 px-6 py-3">
       <div className="flex justify-between items-center">
-        {/* 🔥 LOGO PRO */}
-        <Link to="/" className="flex items-center gap-2">
-          <div className="bg-gray-800 p-1.5 rounded-lg">
-            <img src={logo} alt="Vibra" className="h-7 md:h-8 object-contain" />
+        {/* 🔥 LOGO GRANDE Y CON PRESENCIA */}
+        <Link to="/" className="flex items-center gap-3">
+          <div className="bg-gray-800 p-2 rounded-xl">
+            <img
+              src={logo}
+              alt="Vibra"
+              className="h-10 md:h-11 object-contain"
+            />
           </div>
 
-          <span className="text-white font-semibold text-base md:text-lg tracking-wide">
+          <span className="text-white font-semibold text-lg tracking-wide">
             Vibra
           </span>
         </Link>
