@@ -97,7 +97,7 @@ function Login() {
       <div className="hidden md:flex w-1/2 bg-black text-white items-center justify-center">
         <div>
           <div className="flex justify-center mb-4">
-            <img src={logo} className="h-24 border border-red-500" />
+            <img src={logo} className="h-40 md:h-52 object-contain" />
           </div>
           <p className="text-gray-400 mt-3">
             Conecta con eventos y combos en tiempo real
