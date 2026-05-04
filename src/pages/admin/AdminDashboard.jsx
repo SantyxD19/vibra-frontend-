@@ -73,7 +73,7 @@ function AdminDashboard() {
     }
   };
 
-  // ================= FINALIZAR =================
+  // ================= FINISH =================
   const finishEvent = async (id) => {
     try {
       const res = await fetch(`${API}/api/events/${id}/finish`, {
@@ -133,11 +133,12 @@ function AdminDashboard() {
     }
   };
 
+  // ================= LOADING =================
   if (loading) return <div className="p-6 text-white">Cargando...</div>;
 
   return (
     <div className="p-6 text-white">
-      {/* CREATE */}
+      {/* ================= CREATE ================= */}
       <div className="bg-gray-900 p-4 rounded-2xl mb-8 border border-gray-800">
         <h2 className="font-bold mb-4">Crear evento</h2>
 
@@ -148,18 +149,21 @@ function AdminDashboard() {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
+
           <input
             className="bg-gray-800 p-2 rounded"
             placeholder="Lugar"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
+
           <input
             className="bg-gray-800 p-2 rounded"
             placeholder="Ciudad"
             value={city}
             onChange={(e) => setCity(e.target.value)}
           />
+
           <input
             type="date"
             className="bg-gray-800 p-2 rounded"
@@ -180,24 +184,30 @@ function AdminDashboard() {
         </button>
       </div>
 
-      {/* EVENTS */}
+      {/* ================= EVENTS ================= */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {events.map((event) => (
           <div
             key={event.id}
             className="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800"
           >
+            {/* IMAGE FIXED */}
             <div className="aspect-square bg-gray-800">
-              {/* 🔥 FIX IMPORTANTE AQUÍ */}
-              {event.image_url && (
+              {event.image_url ? (
                 <img
-                  src={event.image_url} // ✅ CORREGIDO
+                  src={event.image_url}
                   className="w-full h-full object-cover"
                   alt={event.name}
+                  loading="lazy"
                 />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-gray-500">
+                  Sin imagen
+                </div>
               )}
             </div>
 
+            {/* INFO */}
             <div className="p-3">
               <h3 className="font-bold">{event.name}</h3>
               <p className="text-gray-400 text-sm">📍 {event.location}</p>
@@ -226,7 +236,7 @@ function AdminDashboard() {
         ))}
       </div>
 
-      {/* EDIT MODAL */}
+      {/* ================= EDIT MODAL ================= */}
       {editingEvent && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center">
           <div className="bg-gray-900 p-6 rounded-xl w-[400px]">
@@ -239,6 +249,7 @@ function AdminDashboard() {
                 setEditingEvent({ ...editingEvent, name: e.target.value })
               }
             />
+
             <input
               className="w-full p-2 mb-2 bg-gray-800 rounded"
               value={editingEvent.location || ""}
@@ -246,6 +257,7 @@ function AdminDashboard() {
                 setEditingEvent({ ...editingEvent, location: e.target.value })
               }
             />
+
             <input
               className="w-full p-2 mb-2 bg-gray-800 rounded"
               value={editingEvent.city || ""}
@@ -253,6 +265,7 @@ function AdminDashboard() {
                 setEditingEvent({ ...editingEvent, city: e.target.value })
               }
             />
+
             <input
               type="date"
               className="w-full p-2 mb-2 bg-gray-800 rounded"
