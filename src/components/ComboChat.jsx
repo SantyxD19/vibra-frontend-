@@ -24,7 +24,7 @@ function ComboChat() {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await fetch(`${API}/api/messages`, {
+        const res = await fetch(`${API}/api/messages/${comboId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
