@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const API = import.meta.env.VITE_API_URL;
+
 function CreateCombo({ event, onCreated }) {
   const [zona, setZona] = useState("");
   const [maxMembers, setMaxMembers] = useState("");
@@ -19,7 +21,7 @@ function CreateCombo({ event, onCreated }) {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:3000/api/combos/create", {
+      const res = await fetch(`${API}/api/combos/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,12 +47,10 @@ function CreateCombo({ event, onCreated }) {
       if (res.ok) {
         alert("Combo creado 🔥");
 
-        // 🔥 limpiar formulario
         setZona("");
         setMaxMembers("");
         setDescription("");
 
-        // 🔥 recargar combos
         onCreated();
       } else {
         alert(data.error || "Error al crear combo");

@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import toast from "react-hot-toast";
 
+const API = import.meta.env.VITE_API_URL;
+
 function ComboChat() {
   const { comboId } = useParams();
   const navigate = useNavigate();
@@ -22,14 +24,11 @@ function ComboChat() {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await fetch(
-          `http://localhost:3000/api/messages/${comboId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+        const res = await fetch(`${API}/api/messages`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
-        );
+        });
 
         const data = await res.json();
         setMessages(data);
@@ -42,11 +41,14 @@ function ComboChat() {
     loadMessages();
   }, [comboId]);
 
-  // 🔥 SOCKET
+  // 🔥 SOCKET (CORREGIDO)
   useEffect(() => {
     if (!comboId) return;
 
-    socket.current = io("http://localhost:3000");
+    socket.current = io(API, {
+      transports: ["websocket"],
+      reconnection: true,
+    });
 
     socket.current.emit("joinCombo", Number(comboId));
 
@@ -68,7 +70,7 @@ function ComboChat() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // 🔥 ENVIAR MENSAJE
+  // 🔥 ENVIAR MENSAJE (CORREGIDO)
   const sendMessage = async (e) => {
     e.preventDefault();
 
@@ -77,7 +79,7 @@ function ComboChat() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:3000/api/messages", {
+      const res = await fetch(`${API}/api/messages`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -93,7 +95,6 @@ function ComboChat() {
 
       if (!res.ok) throw new Error(data.error);
 
-      // 🔥 FIX CLAVE: agregar combo_id al socket
       socket.current.emit("sendMessage", {
         ...data,
         combo_id: Number(comboId),
