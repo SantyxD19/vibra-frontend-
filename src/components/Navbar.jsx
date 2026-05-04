@@ -17,15 +17,9 @@ function Navbar() {
   return (
     <nav className="bg-gray-900 border-b border-gray-800 px-6 py-3">
       <div className="flex justify-between items-center">
-        {/* 🔥 LOGO GRANDE Y CON PRESENCIA */}
+        {/* 🔥 LOGO LIMPIO (SIN CUADRO) */}
         <Link to="/" className="flex items-center gap-3">
-          <div className="bg-gray-800 p-2 rounded-xl">
-            <img
-              src={logo}
-              alt="Vibra"
-              className="h-10 md:h-11 object-contain"
-            />
-          </div>
+          <img src={logo} alt="Vibra" className="h-12 md:h-14 object-contain" />
 
           <span className="text-white font-semibold text-lg tracking-wide">
             Vibra
@@ -62,7 +56,7 @@ function Navbar() {
         </div>
       </div>
 
-      {/* MOBILE MENU */}
+      {/* MOBILE */}
       {open && (
         <div className="md:hidden flex flex-col gap-4 mt-4 text-sm">
           <Link to="/" className={isActive("/")}>
