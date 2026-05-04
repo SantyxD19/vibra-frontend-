@@ -15,12 +15,15 @@ function Navbar() {
       : "text-gray-300 hover:text-white";
 
   return (
-    <nav className="bg-gray-900 border-b border-gray-800 px-6 py-4">
+    <nav className="bg-gray-900 border-b border-gray-800 px-6 py-3">
       <div className="flex justify-between items-center">
-        {/* LOGO */}
-        <div className="flex items-center gap-2">
-          <img src={logo} alt="Vibra" className="h-12" />
-        </div>
+        {/* 🔥 LOGO MEJORADO */}
+        <Link to="/" className="flex items-center gap-2">
+          <img src={logo} alt="Vibra" className="h-8 object-contain" />
+          <span className="text-white font-bold text-lg tracking-wide">
+            Vibra
+          </span>
+        </Link>
 
         {/* BOTÓN MOBILE */}
         <button
@@ -31,13 +34,13 @@ function Navbar() {
         </button>
 
         {/* LINKS DESKTOP */}
-        <div className="hidden md:flex gap-6 items-center">
+        <div className="hidden md:flex gap-6 items-center text-sm">
           <Link to="/" className={isActive("/")}>
             Eventos
           </Link>
 
           <Link to="/my-combos" className={isActive("/my-combos")}>
-            Mis Combos 🔥
+            Combos 🔥
           </Link>
 
           <Link to="/profile" className={isActive("/profile")}>
@@ -52,15 +55,15 @@ function Navbar() {
         </div>
       </div>
 
-      {/* LINKS MOBILE */}
+      {/* MOBILE */}
       {open && (
-        <div className="md:hidden flex flex-col gap-4 mt-4">
+        <div className="md:hidden flex flex-col gap-4 mt-4 text-sm">
           <Link to="/" className={isActive("/")}>
             Eventos
           </Link>
 
           <Link to="/my-combos" className={isActive("/my-combos")}>
-            Mis Combos 🔥
+            Combos 🔥
           </Link>
 
           <Link to="/profile" className={isActive("/profile")}>
