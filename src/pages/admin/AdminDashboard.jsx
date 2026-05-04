@@ -16,6 +16,13 @@ function AdminDashboard() {
   const token = localStorage.getItem("token");
   const API = import.meta.env.VITE_API_URL;
 
+  // ================= HELPER IMÁGENES =================
+  const getImageUrl = (url) => {
+    if (!url) return null;
+    if (url.startsWith("http")) return url;
+    return `${API}${url}`;
+  };
+
   // ================= LOAD =================
   useEffect(() => {
     const loadEvents = async () => {
@@ -133,7 +140,6 @@ function AdminDashboard() {
     }
   };
 
-  // ================= LOADING =================
   if (loading) return <div className="p-6 text-white">Cargando...</div>;
 
   return (
@@ -195,10 +201,9 @@ function AdminDashboard() {
             <div className="aspect-square bg-gray-800">
               {event.image_url ? (
                 <img
-                  src={event.image_url}
+                  src={getImageUrl(event.image_url)}
                   className="w-full h-full object-cover"
                   alt={event.name}
-                  loading="lazy"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-gray-500">
