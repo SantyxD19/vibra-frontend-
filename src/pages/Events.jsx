@@ -7,7 +7,6 @@ function Events() {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
-
   const API = import.meta.env.VITE_API_URL;
 
   const [showMusicModal, setShowMusicModal] = useState(() => {
@@ -74,13 +73,9 @@ function Events() {
               key={event.id}
               className="bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition"
             >
-              {/* IMAGE 🔥 FIX */}
+              {/* IMAGE FIXED 🔥 */}
               <img
-                src={
-                  event.image_url
-                    ? `${API}${event.image_url}`
-                    : "https://placehold.co/400x200"
-                }
+                src={event.image_url || "https://placehold.co/400x200"}
                 onError={(e) => {
                   e.target.src = "https://placehold.co/400x200";
                 }}
