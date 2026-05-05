@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const [user, setUser] = useState(null);
+  const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
+
+  const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
   const API = import.meta.env.VITE_API_URL;
 
+  // ================= GET PROFILE =================
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -30,6 +35,44 @@ function Profile() {
     fetchProfile();
   }, [API]);
 
+  // ================= SELECT IMAGE =================
+  const handleFileChange = (e) => {
+    const selected = e.target.files[0];
+    setFile(selected);
+    setPreview(URL.createObjectURL(selected));
+  };
+
+  // ================= UPLOAD IMAGE =================
+  const handleUpload = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const formData = new FormData();
+      formData.append("bio", user.bio || "");
+      formData.append(
+        "music_preferences",
+        JSON.stringify(user.music_preferences || []),
+      );
+      formData.append("image", file);
+
+      const res = await fetch(`${API}/api/auth/profile`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      setUser(data);
+      setFile(null);
+      setPreview(null);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-950 text-gray-400">
@@ -38,19 +81,50 @@ function Profile() {
     );
   }
 
+  // ================= IMAGE LOGIC =================
+  const imageUrl =
+    preview ||
+    user.profile_image ||
+    user.image ||
+    "https://placehold.co/150x150";
+
   return (
     <div className="min-h-screen bg-gray-950 flex items-center justify-center px-4">
       <div className="bg-gray-900 p-8 rounded-2xl border border-gray-800 w-full max-w-md text-center shadow-lg">
-        {/* FOTO DE PERFIL (FIX REAL) */}
+        {/* FOTO */}
         <img
-          src={
-            user.profile_image || user.image || "https://placehold.co/150x150"
-          }
+          src={imageUrl}
           onError={(e) => {
             e.target.src = "https://placehold.co/150x150";
           }}
           className="w-28 h-28 rounded-full object-cover border-2 border-purple-500 mx-auto"
         />
+
+        {/* BOTÓN CAMBIAR FOTO */}
+        <button
+          onClick={() => fileInputRef.current.click()}
+          className="mt-3 text-sm text-purple-400 hover:underline"
+        >
+          Cambiar foto
+        </button>
+
+        <input
+          type="file"
+          ref={fileInputRef}
+          hidden
+          accept="image/*"
+          onChange={handleFileChange}
+        />
+
+        {/* BOTÓN SUBIR */}
+        {file && (
+          <button
+            onClick={handleUpload}
+            className="mt-3 w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-xl"
+          >
+            Guardar foto
+          </button>
+        )}
 
         {/* NOMBRE */}
         <h2 className="text-white text-2xl font-semibold mt-4">{user.name}</h2>
@@ -78,7 +152,7 @@ function Profile() {
         <div className="flex gap-3 mt-6">
           <button
             onClick={() => navigate("/profile/edit")}
-            className="w-1/2 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-xl transition"
+            className="w-1/2 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-xl"
           >
             Editar perfil ✏️
           </button>
@@ -88,7 +162,7 @@ function Profile() {
               localStorage.removeItem("token");
               window.location.href = "/login";
             }}
-            className="w-1/2 bg-red-600 hover:bg-red-700 text-white py-2 rounded-xl transition"
+            className="w-1/2 bg-red-600 hover:bg-red-700 text-white py-2 rounded-xl"
           >
             Salir
           </button>
