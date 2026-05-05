@@ -18,9 +18,7 @@ function Profile() {
           },
         });
 
-        if (!res.ok) {
-          throw new Error("Error al cargar perfil");
-        }
+        if (!res.ok) throw new Error("Error al cargar perfil");
 
         const data = await res.json();
         setUser(data);
@@ -40,18 +38,16 @@ function Profile() {
     );
   }
 
-  const music = Array.isArray(user.music_preferences)
-    ? user.music_preferences.join(", ")
-    : user.music_preferences || "No definidos";
-
   return (
     <div className="min-h-screen bg-gray-950 flex items-center justify-center px-4">
       <div className="bg-gray-900 p-8 rounded-2xl border border-gray-800 w-full max-w-md text-center shadow-lg">
-        {/* FOTO */}
+        {/* FOTO DE PERFIL (FIX REAL) */}
         <img
-          src={user.image ? `${API}${user.image}` : "/default-avatar.png"}
+          src={
+            user.profile_image || user.image || "https://placehold.co/150x150"
+          }
           onError={(e) => {
-            e.target.src = "/default-avatar.png";
+            e.target.src = "https://placehold.co/150x150";
           }}
           className="w-28 h-28 rounded-full object-cover border-2 border-purple-500 mx-auto"
         />
@@ -70,7 +66,12 @@ function Profile() {
         {/* MÚSICA */}
         <div className="mt-4">
           <p className="text-purple-400 font-semibold">🎵 Gustos musicales</p>
-          <p className="text-gray-300 text-sm mt-1">{music}</p>
+
+          <p className="text-gray-300 text-sm mt-1">
+            {Array.isArray(user.music_preferences)
+              ? user.music_preferences.join(", ")
+              : user.music_preferences || "No definidos"}
+          </p>
         </div>
 
         {/* BOTONES */}
